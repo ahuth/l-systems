@@ -31,4 +31,4 @@ const styles = {
     height: 600,
     width: 600,
   },
-}
+};
