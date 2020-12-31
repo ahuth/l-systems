@@ -7,7 +7,7 @@ export function* generate(axiom: string, rules: Rules): Generator<string> {
 
   while (true) {
     const next = current.split('').map(function (char) {
-      return rules[char];
+      return rules[char] || char;
     }).join('');
 
     yield next;
