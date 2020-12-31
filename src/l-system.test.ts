@@ -25,3 +25,16 @@ test('constants', () => {
   expect(system.next().value).toEqual('abaababacabaababacabaab');
   expect(system.next().value).toEqual('abaababaabaabcabaababaabaabcabaababa');
 });
+
+test('fractal (binary) tree', () => {
+  const system = generate('0', {
+    1: '11',
+    0: '1[0]0',
+  });
+
+  expect(system.next().value).toEqual('1[0]0');
+  expect(system.next().value).toEqual('11[1[0]0]1[0]0');
+  expect(system.next().value).toEqual('1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0');
+  expect(system.next().value).toEqual('11111111[1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0]1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0');
+  expect(system.next().value).toEqual('1111111111111111[11111111[1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0]1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0]11111111[1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0]1111[11[1[0]0]1[0]0]11[1[0]0]1[0]0');
+})
