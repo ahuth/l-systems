@@ -25,3 +25,17 @@ export function* generate(axiom: string, rules: Rules): Generator<string> {
     current = next;
   }
 }
+
+/**
+ * Get the nth value from a generator. Note that generators are stateful, and this does progress
+ * the generator to the specified index.
+ */
+export function goto<T>(generator: Generator<T>, index: number): T {
+  let value = generator.next().value;
+
+  for (let i = 1; i <= index; i++) {
+    value = generator.next().value;
+  }
+
+  return value;
+}
