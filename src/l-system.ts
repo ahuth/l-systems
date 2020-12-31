@@ -15,9 +15,10 @@ export function* generate(axiom: string, rules: Rules): Generator<string> {
   let current = axiom;
 
   while (true) {
-    const next = current.split('').map(function (char) {
-      return rules[char] || char;
-    }).join('');
+    const next = current
+      .split('')
+      .map((char) => rules[char] || char)
+      .join('');
 
     yield next;
 
