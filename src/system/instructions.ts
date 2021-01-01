@@ -1,5 +1,5 @@
 /**
- * Drawing instructions.
+ * L-system drawing instructions.
  */
 export enum Instruction {
   DrawLeaf,

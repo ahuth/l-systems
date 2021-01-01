@@ -1,4 +1,4 @@
-import { Instruction } from './interpreter';
+import { Instruction } from './instructions';
 import { generate, goto } from './l-system';
 
 const axiom = '0';

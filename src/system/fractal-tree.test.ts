@@ -1,5 +1,5 @@
 import fractalTree from './fractal-tree';
-import { Instruction } from './interpreter';
+import { Instruction } from './instructions';
 
 test('generating instructions', () => {
   const instructions = fractalTree(1);
