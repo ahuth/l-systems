@@ -1,4 +1,4 @@
-import { Instruction } from './instructions';
+import { SystemInstruction } from './instructions';
 import { generate, goto } from './l-system';
 
 const axiom = '0';
@@ -10,23 +10,23 @@ const rules = {
 /**
  * Generate drawing instructions for a binary, fractal tree.
  */
-export default function fractalTree(iterations: number): Instruction[] {
+export default function fractalTree(iterations: number): SystemInstruction[] {
   const system = generate(axiom, rules);
   const symbols = goto(system, iterations);
   return symbols.split('').flatMap(getInstructions);
 }
 
-function getInstructions(char: string): Instruction[] {
+function getInstructions(char: string): SystemInstruction[] {
   switch (char) {
     case '0':
-      return [Instruction.DrawLeaf];
+      return [SystemInstruction.DrawLeaf];
     case '1':
-      return [Instruction.DrawLine];
+      return [SystemInstruction.DrawLine];
     case '[':
-      return [Instruction.PushPosition, Instruction.PushAngle, Instruction.TurnLeft];
+      return [SystemInstruction.PushPosition, SystemInstruction.PushAngle, SystemInstruction.TurnLeft];
     case ']':
-      return [Instruction.PopPosition, Instruction.PopAngle, Instruction.TurnRight];
+      return [SystemInstruction.PopPosition, SystemInstruction.PopAngle, SystemInstruction.TurnRight];
     default:
-      return [Instruction.Noop];
+      return [SystemInstruction.Noop];
   }
 }

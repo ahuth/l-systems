@@ -1,49 +1,49 @@
 import fractalTree from './fractal-tree';
-import { Instruction } from './instructions';
+import { SystemInstruction } from './instructions';
 
 test('generating instructions', () => {
   const instructions = fractalTree(1);
   // 11[1[0]0]1[0]0
   expect(instructions).toEqual([
     // 1
-    Instruction.DrawLine,
+    SystemInstruction.DrawLine,
     // 1
-    Instruction.DrawLine,
+    SystemInstruction.DrawLine,
     // [
-    Instruction.PushPosition,
-    Instruction.PushAngle,
-    Instruction.TurnLeft,
+    SystemInstruction.PushPosition,
+    SystemInstruction.PushAngle,
+    SystemInstruction.TurnLeft,
     // 1
-    Instruction.DrawLine,
+    SystemInstruction.DrawLine,
     // [
-    Instruction.PushPosition,
-    Instruction.PushAngle,
-    Instruction.TurnLeft,
+    SystemInstruction.PushPosition,
+    SystemInstruction.PushAngle,
+    SystemInstruction.TurnLeft,
     // 0
-    Instruction.DrawLeaf,
+    SystemInstruction.DrawLeaf,
     // ]
-    Instruction.PopPosition,
-    Instruction.PopAngle,
-    Instruction.TurnRight,
+    SystemInstruction.PopPosition,
+    SystemInstruction.PopAngle,
+    SystemInstruction.TurnRight,
     // 0
-    Instruction.DrawLeaf,
+    SystemInstruction.DrawLeaf,
     // ]
-    Instruction.PopPosition,
-    Instruction.PopAngle,
-    Instruction.TurnRight,
+    SystemInstruction.PopPosition,
+    SystemInstruction.PopAngle,
+    SystemInstruction.TurnRight,
     // 1
-    Instruction.DrawLine,
+    SystemInstruction.DrawLine,
     // [
-    Instruction.PushPosition,
-    Instruction.PushAngle,
-    Instruction.TurnLeft,
+    SystemInstruction.PushPosition,
+    SystemInstruction.PushAngle,
+    SystemInstruction.TurnLeft,
     // 0
-    Instruction.DrawLeaf,
+    SystemInstruction.DrawLeaf,
     // ]
-    Instruction.PopPosition,
-    Instruction.PopAngle,
-    Instruction.TurnRight,
+    SystemInstruction.PopPosition,
+    SystemInstruction.PopAngle,
+    SystemInstruction.TurnRight,
     // 0
-    Instruction.DrawLeaf,
+    SystemInstruction.DrawLeaf,
   ]);
 });
