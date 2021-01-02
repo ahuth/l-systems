@@ -1,4 +1,4 @@
-import { DrawInstruction } from './draw/instructions';
+import { DrawInstruction, createLineInstruction } from './draw/instructions';
 import { SystemInstruction } from './system/instructions';
 
 /**
@@ -10,7 +10,7 @@ export default function interpret(systemInstructions: SystemInstruction[]): Draw
   for (let instruction of systemInstructions) {
     switch (instruction) {
       case SystemInstruction.DrawLine:
-        output.push(DrawInstruction.Line);
+        output.push(createLineInstruction());
         break;
       default:
         continue;

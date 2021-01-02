@@ -1,4 +1,4 @@
-import { DrawInstruction } from './draw/instructions';
+import { createLineInstruction } from './draw/instructions';
 import { SystemInstruction } from './system/instructions';
 import interpret from './interpreter';
 
@@ -10,7 +10,7 @@ test('converting system to canvas instructions', () => {
   ];
   const drawInstructions = interpret(systemInstructions);
   expect(drawInstructions).toEqual([
-    DrawInstruction.Line,
-    DrawInstruction.Line,
+    createLineInstruction(),
+    createLineInstruction(),
   ]);
 });
