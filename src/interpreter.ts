@@ -13,6 +13,9 @@ interface Context {
 
 /**
  * Covnert a sequence of instructions into corresponding lines we can draw to a canvas.
+ *
+ * These lines are in a different coordinate system than the HTML canvas element uses, and will
+ * need to be converted before drawing.
  */
 export default function interpret(systemInstructions: Instruction[], context: Context): Line[] {
   const output: Line[] = [];
