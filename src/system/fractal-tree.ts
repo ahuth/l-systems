@@ -13,6 +13,7 @@ const rules = {
 export default function fractalTree(iterations: number): Instruction[] {
   const system = generate(axiom, rules);
   const symbols = goto(system, iterations);
+  console.log('fractal tree symbols:', symbols);
   return symbols.split('').flatMap(getInstructions);
 }
 
