@@ -23,6 +23,33 @@ export default function interpret(systemInstructions: Instruction[], context: Co
 
   for (let instruction of systemInstructions) {
     switch (instruction) {
+      case Instruction.DrawLeaf: {
+        const originalAngle = turtle.angle;
+        const leafLength = context.segmentLength / 2;
+
+        // Line 1.
+        turtle.turnLeft(context.turnAngle);
+        const end1 = turtle.moveForward(leafLength);
+        output.push(new Line(currentPosition, end1));
+
+        // Line 2.
+        turtle.gotoAngle(originalAngle);
+        turtle.gotoPosition(currentPosition);
+        const end2 = turtle.moveForward(leafLength);
+        output.push(new Line(currentPosition, end2));
+
+        // Line 3.
+        turtle.gotoAngle(originalAngle);
+        turtle.gotoPosition(currentPosition);
+        turtle.turnRight(context.turnAngle);
+        const end3 = turtle.moveForward(leafLength);
+        output.push(new Line(currentPosition, end3));
+
+        // Restore original location.
+        turtle.gotoAngle(originalAngle);
+        turtle.gotoPosition(currentPosition);
+        break;
+      }
       case Instruction.DrawLine: {
         const nextPosition = turtle.moveForward(context.segmentLength);
         const line = new Line(currentPosition, nextPosition);
