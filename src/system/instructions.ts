@@ -1,7 +1,7 @@
 /**
  * L-system drawing instructions.
  */
-export enum SystemInstruction {
+export enum Instruction {
   DrawLeaf,
   DrawLine,
   Noop,
