@@ -1,9 +1,29 @@
 import { useRef, useState } from 'react';
+import { clear, drawLines } from '../draw/canvas';
+import Angle from '../geometry/Angle';
+import Vec from '../geometry/Vec';
+import fractalTree from '../system/fractal-tree';
+import interpret from '../interpreter';
 
 export default function App() {
   const [angle, setAngle] = useState(45);
-  const [iterations, setIterations] = useState(1);
+  const [iterations, setIterations] = useState(7);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  function handleClick() {
+    if (canvasRef.current) {
+      const instructions = fractalTree(iterations);
+      const lines = interpret(instructions, {
+        segmentLength: 2,
+        startAngle: Angle.fromDegrees(90),
+        startPosition: new Vec(0, -300),
+        turnAngle: Angle.fromDegrees(angle),
+      });
+      const context = canvasRef.current.getContext('2d')!;
+      clear(context);
+      drawLines(lines, context);
+    }
+  }
 
   return (
     <>
@@ -18,17 +38,11 @@ export default function App() {
           <input id="iterations" type="range" min="1" max="20" value={iterations} onChange={(event) => setIterations(Number(event.target.value))} />
           <span>{iterations}</span>
         </div>
+        <button onClick={handleClick}>Draw</button>
       </header>
       <main>
-        <canvas ref={canvasRef} style={styles.canvas} />
+        <canvas ref={canvasRef} height="600" width="600" />
       </main>
     </>
   );
 }
-
-const styles = {
-  canvas: {
-    height: 600,
-    width: 600,
-  },
-};

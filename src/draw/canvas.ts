@@ -21,10 +21,11 @@ export function drawLines(lines: Line[], context: CanvasRenderingContext2D): voi
 export function drawLine(line: Line, context: CanvasRenderingContext2D): void {
   const from = convertCoordinates(line.from, context);
   const to = convertCoordinates(line.to, context);
+  context.lineWidth = 1;
   context.beginPath();
   context.moveTo(from.x, from.y);
   context.lineTo(to.x, to.y);
-  context.fill();
+  context.stroke();
 }
 
 /**
