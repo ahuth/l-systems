@@ -19,12 +19,22 @@ import Vec from './Vec';
  * As far as angles go, 0 degrees points straight to the right, and 90 degrees straight up.
  */
 export default class Turtle {
-  private angle: Angle;
-  private position: Vec;
+  angle: Angle;
+  position: Vec;
 
   constructor(angle: Angle, position: Vec) {
     this.angle = angle;
     this.position = position;
+  }
+
+  gotoAngle(angle: Angle): Vec {
+    this.angle = angle;
+    return this.position;
+  }
+
+  gotoPosition(position: Vec): Vec {
+    this.position = position;
+    return position;
   }
 
   turnRight(angle: Angle): Vec {

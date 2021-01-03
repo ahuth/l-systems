@@ -17,6 +17,8 @@ interface Context {
 export default function interpret(systemInstructions: Instruction[], context: Context): Line[] {
   const output: Line[] = [];
   const turtle = new Turtle(context.startAngle, context.startPosition);
+  const angleStack: Angle[] = [];
+  const positionStack: Vec[] = [];
   let currentPosition = context.startPosition;
 
   for (let instruction of systemInstructions) {
@@ -28,6 +30,27 @@ export default function interpret(systemInstructions: Instruction[], context: Co
         currentPosition = nextPosition;
         break;
       }
+      case Instruction.PopAngle: {
+        const previousAngle = angleStack.pop();
+        if (previousAngle) {
+          turtle.gotoAngle(previousAngle);
+        }
+        break;
+      }
+      case Instruction.PopPosition: {
+        const previousPosition = positionStack.pop();
+        if (previousPosition) {
+          currentPosition = previousPosition;
+          turtle.gotoPosition(previousPosition);
+        }
+        break;
+      }
+      case Instruction.PushAngle:
+        angleStack.push(turtle.angle);
+        break;
+      case Instruction.PushPosition:
+        positionStack.push(turtle.position);
+        break;
       case Instruction.TurnLeft:
         turtle.turnLeft(context.turnAngle);
         break;

@@ -29,3 +29,30 @@ test('converting instructions to lines', () => {
   expect(lines[1].to.x).toBeCloseTo(-17.678, 3);
   expect(lines[1].to.y).toBeCloseTo(42.678, 3);
 });
+
+test('pushing and popping positions', () => {
+  const instructions = [
+    Instruction.PushPosition,
+    Instruction.DrawLine,
+    Instruction.PopPosition,
+    Instruction.TurnRight,
+    Instruction.DrawLine,
+  ];
+
+  const lines = interpret(instructions, {
+    segmentLength: 25,
+    startAngle: Angle.fromDegrees(90),
+    startPosition: new Vec(0, 0),
+    turnAngle: Angle.fromDegrees(90),
+  });
+
+  expect(lines[0].from.x).toBeCloseTo(0, 3);
+  expect(lines[0].from.y).toBeCloseTo(0, 3);
+  expect(lines[0].to.x).toBeCloseTo(0, 3);
+  expect(lines[0].to.y).toBeCloseTo(25, 3);
+
+  expect(lines[1].from.x).toBeCloseTo(0, 3);
+  expect(lines[1].from.y).toBeCloseTo(0, 3);
+  expect(lines[1].to.x).toBeCloseTo(25, 3);
+  expect(lines[1].to.y).toBeCloseTo(0, 3);
+});
