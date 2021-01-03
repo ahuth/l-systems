@@ -24,6 +24,8 @@ export default function interpret(systemInstructions: Instruction[], context: Co
   const positionStack: Vec[] = [];
   let currentPosition = context.startPosition;
 
+  // Convert an instruction into one or more lines. This is a state machine, since the instructions
+  // can be statefull.
   for (let instruction of systemInstructions) {
     switch (instruction) {
       case Instruction.DrawLeaf: {
