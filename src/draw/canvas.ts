@@ -9,13 +9,6 @@ export function clear(context: CanvasRenderingContext2D): void {
 }
 
 /**
- * Draw a list of lines.
- */
-export function drawLines(lines: Line[], context: CanvasRenderingContext2D): void {
-  lines.forEach((line) => drawLine(line, context));
-}
-
-/**
  * Draw a single line.
  */
 export function drawLine(line: Line, context: CanvasRenderingContext2D): void {

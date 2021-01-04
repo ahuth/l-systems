@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react';
-import { clear, drawLines } from '../draw/canvas';
+import { clear, drawLine } from '../draw/canvas';
 import Angle from '../geometry/Angle';
+import Line from '../geometry/Line';
 import Vec from '../geometry/Vec';
 import fractalTree from '../system/fractal-tree';
 import interpret from '../interpreter';
@@ -22,7 +23,7 @@ export default function App() {
       });
       const context = canvasRef.current.getContext('2d')!;
       clear(context);
-      drawLines(lines, context);
+      drawLinesSequentially(lines, context);
     }
   }
 
@@ -41,7 +42,7 @@ export default function App() {
         </div>
         <div>
           <label htmlFor="length">Length</label>
-          <input id="length" type="range" min="0.1" max="5" step="0.1" value={length} onChange={(event) => setLength(Number(event.target.value))} />
+          <input id="length" type="range" min="0.1" max="20" step="0.1" value={length} onChange={(event) => setLength(Number(event.target.value))} />
           <span>{length}</span>
         </div>
         <button onClick={handleClick}>Draw</button>
@@ -51,4 +52,17 @@ export default function App() {
       </main>
     </>
   );
+}
+
+function drawLinesSequentially(lines: Line[], context: CanvasRenderingContext2D): void {
+  lines.reduce((acc, line) => {
+    return acc.then(() => {
+      return new Promise((resolve) => {
+        drawLine(line, context);
+        setTimeout(() => {
+          resolve();
+        }, 1);
+      });
+    });
+  }, Promise.resolve());
 }
